@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>MovieBox</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/materialize.min.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/signup.css' %}" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <!-- TODO: Header -->
+    <header class="main-header">
+      <div class="navbar-fixed">
+        <nav class="transparent">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">MovieBox</a>
+              <a href="#" class="button-collapse" data-activates="mobile-nav">
+                <i class="fa fa-bars"></i>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a href="{% url 'home' %}">
+                    Home
+                  </a>
+                </li>
+              </ul>
+        </nav>
+      </div>
+      <!-- TODO: SideNav -->
+      <ul class="side-nav" id="mobile-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="{% static 'main/img/background.jpg' %}" alt="">
+            </div>
+            <h4 class="center">MovieBox</h4>
+          </div>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="{% url 'home' %}">
+            <i class="material-icons grey-text text-darken-4">home</i> Home
+          </a>
+        </li>
+      </ul>
+      <!-- TODO: Showcase -->
+      <div class="showcase">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m10 offset-m1 center">
+              <h4>Welcome to MovieBox</h4>
+              <h1>Create Your Account</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TODO: Signup -->
+    <main>
+      <section class="section section-signup">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m6">
+              <br>
+              <h4><span class="amber-text text-darken-1"><strong>Create</strong></span>
+                a free account</h4>
+              <p>Complete the form and start using all of the MovieBox features.
+                It's that easy!
+              </p>
+              <br>
+              <h4><span class="amber-text text-darken-1"><strong>Manage</strong></span>
+                your collection</h4>
+              <p>Keeping track of the movies you've watched has never been easier.
+                Browse through our database, rate, add and manage all your favourite
+                movies.
+              </p>
+              <br>
+              <h4>
+                <span class="amber-text text-darken-1"><strong>Get</strong></span>
+                intuitive recommendations</h4>
+              <p>Our AI driven Movie Recommendations Engine scans your movie collection and
+                dynamically calculates what movies match your taste the best.
+              </p>
+            </div>
+            <div class="col s12 m6">
+              <div class="card-panel grey lighten-4 grey-text text-darken-4 center">
+                <h4>Sign Up Form</h4>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="input-field">
+                    <input type="text" id="username" name="username" value="">
+                    <label for="username">Username*</label>
+                  </div>
+                  <div class="input-field">
+                    <input type="password" id="password1" name="password1" value="">
+                    <label for="password1">Password*</label>
+                  </div>
+                  <div class="input-field">
+                    <input type="password" id="password2" name="password2" value="">
+                    <label for="password2">Confirm password*</label>
+                  </div>
+
+                  <input type="submit" name="" value="Sign Up" class="btn btn-large teal lighten-1 btn-extend waves-effect waves-light">
+                </form>
+                {% if error %}
+                <p class="red-text">
+                  Error: {{ error }}!
+                </p>
+                {% else %}
+                <br><br>
+                {% endif %}
+                <p>Already have an account? <a href="{% url 'login_user' %}">Login</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- TODO: Footer -->
+    <footer class="page-footer teal lighten-1 white-text center">
+      <div class="container">
+        <p class="footer-text">Copyright &copy; Andrei Telehoi, MovieBox 2020</p>
+      </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/js/materialize.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+        // Custom JS & jQuery here
+
+        // TODO: sidebar
+        $('.button-collapse').sideNav();
+
+        // TODO: parallax
+        $('.parallax').parallax();
+
+        //TODO: stats counter
+        $('.count').each(function() {
+          $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+          }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function(now) {
+              $(this).text(Math.ceil(now));
+            }
+          });
+        });
+
+        // TODO: ScrollFire
+        const options = [{
+          selector: '.navbar-fixed',
+          offset: 1000,
+          callback: function() {
+            $('nav').removeClass('transparent');
+            $('nav').addClass('teal lighten-1');
+          }
+        }];
+
+        Materialize.scrollFire(options);
+
+        // TODO: Select
+        $('select').material_select();
+
+      });
+    </script>
+  </body>
+
+</html>

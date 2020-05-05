@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>MovieBox</title>
+    <!-- TODO: Font Awesome -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!-- TODO: Materialize -->
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/materialize.min.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/main.css' %}" />
+
+    <!-- TODO: Mobile optimization -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+
+
+
+
+    {% block content %}{% endblock %}
+
+
+
+
+
+    <!-- TODO: Footer -->
+    <footer class="page-footer teal lighten-1 white-text center">
+      <div class="container">
+        <p class="footer-text">Copyright &copy; Andrei Telehoi, MovieBox 2020</p>
+      </div>
+    </footer>
+
+    <!-- TODO: JS imports -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/js/materialize.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+        // Custom JS & jQuery here
+
+        // TODO: sidebar
+        $('.button-collapse').sideNav();
+
+        // TODO: parallax
+        $('.parallax').parallax();
+
+        //TODO: stats counter
+        $('.count').each(function() {
+          $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+          }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function(now) {
+              $(this).text(Math.ceil(now));
+            }
+          });
+        });
+
+        // TODO: ScrollFire
+        const options = [{
+          selector: '.navbar-fixed',
+          offset: 1000,
+          callback: function() {
+            $('nav').removeClass('transparent');
+            $('nav').addClass('teal lighten-1');
+          }
+        }];
+
+        Materialize.scrollFire(options);
+
+        // TODO: Select
+        $('select').material_select();
+
+      });
+    </script>
+  </body>
+
+</html>

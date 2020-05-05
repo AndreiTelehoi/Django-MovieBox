@@ -1,0 +1,48 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
+
+.main-header {
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+  color: #fff;
+}
+
+.btn-extend {
+  display: block;
+  width: 100%;
+}
+
+
+.user-view {
+  min-height: 100px;
+}
+
+.btn-logout{
+  margin-left: 25%;
+  margin-top: 10px;
+}
+
+.main-header .showcase {
+  padding-top: 50px;
+}
+
+.footer-text {
+  margin-bottom: 30px;
+}
+
+#star {
+  vertical-align: middle;
+  margin-bottom: 2.8px;
+}
+
+.card-panel {
+  height: 500px;
+}

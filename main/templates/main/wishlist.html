@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>MovieBox</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/materialize.min.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/collection.css' %}" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <!-- TODO: Header -->
+    <header class="main-header">
+      <div class="navbar-fixed">
+        <nav class="transparent">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo">MovieBox</a>
+              <a href="#" class="button-collapse" data-activates="mobile-nav">
+                <i class="fa fa-bars"></i>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a href="{% url 'home' %}">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'browse' %}">
+                    Browse
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'collection' %}">
+                    Collection
+                  </a>
+                </li>
+                <li class="active">
+                  <a href="{% url 'wishlist' %}">
+                    Wishlist
+                  </a>
+                </li>
+                <li>
+                  <a href="{% url 'recommendations' %}">
+                    Recommendations
+                  </a>
+                </li>
+                <li>
+                  <form action="{% url 'logout_user' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn teal lighten-1 waves-effect waves-light" type="submit">
+                      <i class="fas fa-sign-out-alt grey-text text-darken-4"></i> Logout
+                    </button>
+                  </form>
+                </li>
+              </ul>
+        </nav>
+      </div>
+      <!-- TODO: SideNav -->
+      <ul class="side-nav" id="mobile-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="{% static 'main/img/background.jpg' %}" alt="">
+            </div>
+            <h4 class="center">MovieBox</h4>
+          </div>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="{% url 'home' %}">
+            <i class="material-icons grey-text text-darken-4">home</i> Home
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'browse' %}">
+            <i class="material-icons grey-text text-darken-4">search</i> Browse
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'collection' %}">
+            <i class="material-icons grey-text text-darken-4">video_library</i> Collection
+          </a>
+        </li>
+        <li class="active">
+          <a href="{% url 'wishlist' %}">
+            <i class="material-icons grey-text text-darken-4">ondemand_video</i> Wishlist
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'recommendations' %}">
+            <i class="material-icons grey-text text-darken-4">movie_filter</i> Recommendations
+          </a>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <form action="{% url 'logout_user' %}" method="POST">
+            {% csrf_token %}
+            <button id="logout" class="btn teal lighten-1 btn-large waves-effect waves-light" type="submit">
+              <i class="fas fa-sign-out-alt grey-text text-darken-4"></i> Logout
+            </button>
+          </form>
+        </li>
+      </ul>
+      <!-- TODO: Showcase -->
+      <div class="showcase">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 m10 offset-m1 center">
+              <h2>All Your Favourite Movies, One Place</h2>
+              <br>
+              <section class="section section-subheader white-text center">
+                <div class="container">
+                  <h3>View your wishlist</h4>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <main>
+      <!-- TODO: Show movies -->
+      {% if ratings %}
+      <section class="section movie-section">
+        <div class="container">
+          <div class="row">
+            {% for rating in ratings %}
+            <div class="col s12 m4 l3">
+              <div class="card large">
+                <div class="card-image">
+                  <img src="{{ rating.movie.poster }}">
+                </div>
+                <div class="card-content">
+                  <p class="card-title">{{rating.movie.title}}</p>
+                  <p>{{rating.movie.genres}}</p>
+                </div>
+                <div class="card-action">
+                  <a class="btn teal lighten-1 waves-effect waves-light" href="{% url 'wish_details' rating.id %}">
+                    Options
+                  </a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+      {% else %}
+      <section class="section section-error">
+        <div class="container center">
+          <div class="row">
+            <div class="col s12">
+              <div class="card-panel grey lighten-4 grey-text text-darken-4">
+                <div class="card-content">
+                  <p class="flow-text">Uh oh! You don't have any {{ genre }} movies in your wishlist.</p>
+                  <p class="flow-text">Feel free to add your first {{ genre }} movies!</p>
+                  <a href="{% url 'browse' %}" class="btn teal lighten-1 waves-effect waves-light">Browse</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {% endif %}
+
+    </main>
+
+    <!-- TODO: Footer -->
+    <footer class="page-footer teal lighten-1 white-text center">
+      <div class="container">
+        <p class="footer-text">Copyright &copy; Andrei Telehoi, MovieBox 2020</p>
+      </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/js/materialize.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+        // Custom JS & jQuery here
+
+        // TODO: sidebar
+        $('.button-collapse').sideNav();
+
+        // TODO: parallax
+        $('.parallax').parallax();
+
+        //TODO: stats counter
+        $('.count').each(function() {
+          $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+          }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function(now) {
+              $(this).text(Math.ceil(now));
+            }
+          });
+        });
+
+        // TODO: ScrollFire
+        const options = [{
+          selector: '.navbar-fixed',
+          offset: 1000,
+          callback: function() {
+            $('nav').removeClass('transparent');
+            $('nav').addClass('teal lighten-1');
+          }
+        }];
+
+        Materialize.scrollFire(options);
+
+        // TODO: Select
+        $('select').material_select();
+
+      });
+    </script>
+  </body>
+
+</html>

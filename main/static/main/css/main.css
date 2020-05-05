@@ -1,0 +1,70 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+.main-header-logged-out {
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  color: #fff;
+}
+
+.main-header-logged-out .showcase {
+  padding-top: 70px;
+}
+
+.main-header-logged-in {
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  color: #fff;
+}
+
+.main-header-logged-in .showcase-logged-in {
+  padding-top: 50px;
+}
+
+#logout{
+  margin-left: 25%;
+  margin-top: 10px;
+}
+
+.user-view {
+  min-height: 100px;
+}
+
+.home {
+  height: 300px;
+}
+
+.parallax-container{
+    height: 250px;
+}
+
+.about-image {
+  margin-top: 50px;
+}
+
+.section-icons {
+  margin-top: 40px;
+}
+
+.section-about {
+  margin-top: 20px;
+}
+
+.section-stat {
+  margin-top: 40px;
+}
+
+.footer-text {
+  margin-bottom: 30px;
+}

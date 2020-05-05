@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+
+
+<!-- TODO: Header -->
+<header class="main-header-logged-in">
+  <div class="navbar-fixed">
+    <nav class="transparent">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">MovieBox</a>
+          <a href="#" class="button-collapse" data-activates="mobile-nav">
+            <i class="fa fa-bars"></i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a href="{% url 'home' %}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'browse' %}">
+                Browse
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'collection' %}">
+                Collection
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'wishlist' %}">
+                Wishlist
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'recommendations' %}">
+                Recommendations
+              </a>
+            </li>
+            <li>
+              <form action="{% url 'logout_user' %}" method="POST">
+                {% csrf_token %}
+                <button class="btn teal waves-effect waves-light" type="submit">
+                  <i class="fas fa-sign-out-alt grey-text text-darken-4"></i> Logout
+                </button>
+              </form>
+            </li>
+          </ul>
+    </nav>
+  </div>
+  <!-- TODO: SideNav -->
+  <ul class="side-nav" id="mobile-nav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="{% static 'main/img/background.jpg' %}" alt="">
+        </div>
+        <h4 class="center">MovieBox</h4>
+      </div>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li class="active">
+      <a href="{% url 'home' %}">
+        <i class="material-icons grey-text text-darken-4">home</i> Home
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'browse' %}">
+        <i class="material-icons grey-text text-darken-4">search</i> Browse
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'collection' %}">
+        <i class="material-icons grey-text text-darken-4">video_library</i> Collection
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'wishlist' %}">
+        <i class="material-icons grey-text text-darken-4">ondemand_video</i> Wishlist
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'recommendations' %}">
+        <i class="material-icons grey-text text-darken-4">movie_filter</i> Recommendations
+      </a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <form action="{% url 'logout_user' %}" method="POST">
+        {% csrf_token %}
+        <button id="logout" class="btn teal btn-large waves-effect waves-light" type="submit">
+          <i class="fas fa-sign-out-alt grey-text text-darken-4"></i> Logout
+        </button>
+      </form>
+    </li>
+  </ul>
+  <!-- TODO: Showcase -->
+  <div class="showcase-logged-in">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m10 offset-m1 center">
+          <h4>Welcome to MovieBox, {{ user.username }}</h4>
+          <h1>All Your Favourite Movies, One Place</h1>
+          <br>
+          <a href="{% url 'browse' %}" class="btn-grad btn btn-large white amber-text text-darken-1 waves-effect waves-light">
+            Browse
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+{% else %}
+
+
+
+<!-- TODO: Header -->
+<header class="main-header-logged-out">
+  <div class="navbar-fixed">
+    <nav class="transparent">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">MovieBox</a>
+          <a href="#" class="button-collapse" data-activates="mobile-nav">
+            <i class="fa fa-bars"></i>
+          </a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <a href="{% url 'home' %}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'login_user' %}">
+                Login
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'signup_user' %}">
+                Signup
+              </a>
+            </li>
+          </ul>
+    </nav>
+  </div>
+  <!-- TODO: Side-nav -->
+  <ul class="side-nav" id="mobile-nav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="{% static 'main/img/background.jpg' %}" alt="">
+        </div>
+        <h4 class="center">MovieBox</h4>
+      </div>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li class="active">
+      <a href="{% url 'home' %}">
+        <i class="fa fa-home grey-text text-darken-4"></i> Home
+      </a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a href="{% url 'login_user' %}" class="btn teal lighten-1 waves-effect waves-light">Login</a>
+      <a href="{% url 'signup_user' %}" class="btn teal lighten-1 waves-effect waves-light">Signup</a>
+    </li>
+  </ul>
+  <!-- TODO: Showcase -->
+  <div class="showcase">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m10 offset-m1 center">
+          <h4>Welcome to MovieBox</h4>
+          <h1>All Your Favourite Movies, One Place</h1>
+          <br>
+          <a href="{% url 'login_user' %}" class="btn btn-large white amber-text text-darken-1 waves-effect waves-light">
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% endif %}
+
+<main>
+  <!-- TODO: Icon Boxes -->
+  <section class="section section-icons center">
+    <div class="row">
+      <div class="container">
+        <div class="col s12 l4">
+          <div class="card-panel home">
+            <div class="card-content">
+              <i class="large material-icons cyan-text text-darken-2">account_circle</i>
+              <h5 class="grey-text text-darken-4">Free Account</h5>
+              <p>Create a free account and start using MovieBox's awesome features.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 l4">
+          <div class="card-panel home">
+            <div class="card-content">
+              <i class="large material-icons cyan-text text-darken-2">video_library</i>
+              <h5 class="grey-text text-darken-4">Your Collection</h5>
+              <p>Add the movies you've seen to your collection
+                and give them a rating.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 l4">
+          <div class="card-panel home">
+            <div class="card-content">
+              <i class="large material-icons cyan-text text-darken-2">flash_on</i>
+              <h5 class="grey-text text-darken-4">Recommendations</h5>
+              <p>AI generated recommendations based on your preferences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODO: Parallax -->
+  <section class="section section-parallax parallax-container">
+    <div class="parallax">
+      <img src="{% static 'main/img/parallax.jpg' %}" class="responsive-img">
+    </div>
+  </section>
+
+  <!-- TODO: About -->
+  <section class="section section-about grey lighten-4">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6">
+          <h3 class="center">About us</h3>
+          <p class="flow-text">
+            <span class="amber-text text-darken-1">
+              <strong>MovieBox</strong>
+            </span>is a platform that aims to help
+            movie lovers keep track of all the movies they've watched.
+            Moreover, with the help of our AI driven Recommendation System,
+            we will ofer our users movie suggestions based on their past
+            preferences.
+          </p>
+        </div>
+        <div class="about-image col s12 m6">
+          <img src="{% static 'main/img/about.jpg' %}" alt="" class="circle responsive-img">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TODO: Parallax -->
+  <section class="section section-parallax parallax-container">
+    <div class="parallax">
+      <img src="{% static 'main/img/background.jpg' %}" class="responsive-img">
+    </div>
+  </section>
+
+  <!-- TODO: Stat Counter -->
+  <section class="section section-stat center">
+    <div class="row">
+      <div class="container">
+        <div class="col s12 m4">
+          <div class="card-panel cyan darken-2 white-text center home">
+            <i class="material-icons medium">local_movies</i>
+            <h4>Movies</h4>
+            <h3><span class="count">9000</span> +</h3>
+            <div class="progress grey lighten-1">
+              <div class="determinate white" style="width: 55%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card-panel center home">
+            <i class="material-icons medium cyan-text text-darken-2">person_pin</i>
+            <h4 class="cyan-text text-darken-2">Users</h4>
+            <h3 class="cyan-text text-darken-2"><span class="count">600</span> +</h3>
+            <div class="progress grey lighten-1">
+              <div class="determinate cyan darken-2" style="width: 40%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m4">
+          <div class="card-panel cyan darken-2 white-text center home">
+            <i class="material-icons medium">stars</i>
+            <h4>Ratings</h4>
+            <h3><span class="count">100000</span> +</h3>
+            <div class="progress grey lighten-1">
+              <div class="determinate white" style="width: 90%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+{% endblock %}

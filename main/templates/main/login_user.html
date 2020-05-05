@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>MovieBox</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/materialize.min.css' %}" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="{% static 'main/css/login.css' %}" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+
+    <!-- TODO: Navbar -->
+    <header class="main-header-auth">
+      <div class="navbar-fixed">
+        <nav class="transparent">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a href="#!" class="brand-logo">MovieBox</a>
+              <a href="#" data-activates="mobile-nav" class="button-collapse">
+                <i class="material-icons">menu</i>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a href="{% url 'home' %}">Home</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- TODO: Sidenav -->
+      <ul class="side-nav" id="mobile-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+              <img src="{% static 'main/img/background.jpg' %}" alt="">
+            </div>
+            <h4 class="center white-text">MovieBox</h4>
+          </div>
+        </li>
+        <li>
+          <div class="divider"></div>
+        </li>
+        <li>
+          <a href="{% url 'home' %}">
+            <i class="material-icons grey-text text-darken-4">home</i> Home
+          </a>
+        </li>
+      </ul>
+      <!-- TODO: Showcase -->
+      <div class="showcase container">
+        <div class="row">
+          <div class="col s12 login-form">
+            <div class="container center">
+              <div class="card-panel grey lighten-4 grey-text text-darken-4">
+                <!-- TODO: Form -->
+                <h2>Login</h2>
+                <p class="flow-text">Login to access your account dashboard</p>
+                <br>
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="input-field">
+                    <i class="material-icons medium amber-text text-darken-1 prefix">person_outline</i>
+                    <input type="text" id="username" name="username" value="">
+                    <label class="active" for="username">Username</label>
+                  </div>
+                  <div class="input-field">
+                    <i class="material-icons medium amber-text text-darken-1 prefix">lock_outline</i>
+                    <input type="password" id="password" name="password" value="">
+                    <label class="active" for="password">Password</label>
+                  </div>
+                  <button class="btn btn-extend teal lighten-1 waves-effect waves-light" type="submit">Login</button>
+                </form>
+                {% if error %}
+                <p class="red-text">
+                  Error: {{ error }}!
+                </p>
+                {% else %}
+                <br><br>
+                {% endif %}
+                <a href="{% url 'signup_user' %}">Don't have an account?</a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+
+    </main>
+
+    <!-- TODO: Footer -->
+
+    <footer class="page-footer teal lighten-1 white-text center">
+      <div class="container">
+        <p class="footer-text">Copyright &copy; Andrei Telehoi, MovieBox 2020</p>
+      </div>
+    </footer>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/js/materialize.min.js' %}"></script>
+    <script>
+      $(document).ready(function() {
+        // Custom JS & jQuery here
+
+        // TODO: sidebar
+        $('.button-collapse').sideNav();
+
+        // TODO: parallax
+        $('.parallax').parallax();
+
+        //TODO: stats counter
+        $('.count').each(function() {
+          $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+          }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function(now) {
+              $(this).text(Math.ceil(now));
+            }
+          });
+        });
+
+        // TODO: ScrollFire
+        const options = [{
+          selector: '.navbar-fixed',
+          offset: 1000,
+          callback: function() {
+            $('nav').removeClass('transparent');
+            $('nav').addClass('teal lighten-1');
+          }
+        }];
+
+        Materialize.scrollFire(options);
+
+        // TODO: Select
+        $('select').material_select();
+
+      });
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,49 @@
+.footer-text {
+  margin-bottom: 30px;
+}
+
+.main-header {
+  background: url(../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+  color: #fff;
+}
+
+.main-header .showcase {
+  padding-top: 50px;
+}
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+ #logout{
+   margin-left: 25%;
+   margin-top: 10px;
+ }
+
+ .user-view {
+   min-height: 100px;
+ }
+
+ /* TODO: Specific */
+
+ .section-search input {
+   padding: 5px !important;
+   font-size: 18px !important;
+   width: 90% !important;
+   border: #f4f4f4 3px solid !important;
+ }
+
+ .autocomplete-content {
+   position: absolute;
+   width: 100%;
+   align: center;
+ }
